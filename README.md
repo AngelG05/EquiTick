@@ -22,4 +22,3 @@ A production-grade engine for real-time pay equity enforcement.
 ## UI / Monitoring
 - **Real-time Dashboard**: Built with Vite + React + Tailwind + Chart.js.
 - **Telemetry**: Sub-millisecond visualization of throughput (500k+ events/sec) and end-to-end latency.
-- 
