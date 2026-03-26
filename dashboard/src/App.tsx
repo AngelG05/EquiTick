@@ -49,7 +49,7 @@ const Dashboard = () => {
     bias: Array(20).fill(0)
   });
 
-  // Simulated real-time updates for demonstration
+  // Simulated real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       setMetrics(prev => ({
