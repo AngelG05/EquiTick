@@ -1,8 +1,8 @@
-# EquiTick (Elite Edition)
+# EquiTick
 
-A high-frequency trading (HFT) grade engine for real-time pay equity enforcement.
+A production-grade engine for real-time pay equity enforcement.
 
-## Tech Specs (Hudson River Trading / Optiver Tier)
+## Tech Specs
 
 ### 1. Low-Latency Data Path
 - **Lock-Free MPSC Ring Buffer**: Multi-producer, single-consumer queue for $O(1)$ event passing without kernel locks.
@@ -22,7 +22,4 @@ A high-frequency trading (HFT) grade engine for real-time pay equity enforcement
 ## UI / Monitoring
 - **Real-time Dashboard**: Built with Vite + React + Tailwind + Chart.js.
 - **Telemetry**: Sub-millisecond visualization of throughput (500k+ events/sec) and end-to-end latency.
-
-## Getting Started
-1. Build C++: `mkdir build && cd build && cmake .. && make`
-2. Launch UI: `cd dashboard && npm install && npm run dev`
+- 
