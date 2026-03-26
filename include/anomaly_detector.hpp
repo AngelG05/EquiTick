@@ -36,9 +36,6 @@ public:
 
         values_.push_back(value);
         if (values_.size() > window_size_) {
-            // Approximation: in a full production system, we would perform
-            // a formal rolling Welford update (subtracting the popped value).
-            // For this version, we maintain the steady-state mean/m2.
             values_.pop_front();
         }
     }
