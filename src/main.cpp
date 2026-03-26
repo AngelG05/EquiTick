@@ -2,8 +2,6 @@
  * @file main.cpp
  * @brief EquiTick High-Frequency Pay Equity Enforcement Engine
  * 
- * "What you don’t measure in time, you normalize over time."
- * 
  * Core engine implementation orchestrating zero-copy feed handling, 
  * real-time regression, and automated fairness interception.
  */
@@ -42,8 +40,8 @@ void engine_worker(RingBuffer<CompensationEvent, 65536>& queue) {
 
     OnlineRegression model;
     AnomalyDetector detector;
-    Interceptor interceptor(0.2, 3.5); // 20% bias threshold, 3.5 Sigma anomaly threshold
-
+    Interceptor interceptor(0.2, 3.5);
+    
     const size_t SIMD_BATCH_SIZE = 128;
     std::vector<double> adjustment_batch;
     adjustment_batch.reserve(SIMD_BATCH_SIZE);
@@ -77,7 +75,6 @@ void engine_worker(RingBuffer<CompensationEvent, 65536>& queue) {
         Decision decision = interceptor.process(event, predicted, z_score);
 
         // 4. Vectorized Batch Processing (SIMD Demo)
-        // In a real system, this would be used for batch currency conversion or tiered adjustment.
         adjustment_batch.push_back(event.BaseSalary);
         if (adjustment_batch.size() >= SIMD_BATCH_SIZE) {
             SIMDMath::add_batch(adjustment_batch.data(), SIMD_BATCH_SIZE, 0.0); 
@@ -125,7 +122,6 @@ void feed_handler_sim(RingBuffer<CompensationEvent, 65536>& queue) {
         event.YearsExperience = static_cast<uint16_t>(exp_dist(rng));
         
         // Dynamic Bias Simulation:
-        // Inject a 15% salary reduction for 10% of the population to test detection logic.
         if (bias_roll(rng) <= 10) {
             event.gender = Gender::FEMALE;
             event.BaseSalary *= 0.85;
@@ -144,9 +140,7 @@ void feed_handler_sim(RingBuffer<CompensationEvent, 65536>& queue) {
 }
 
 int main() {
-    std::cout << "====================================================" << std::endl;
     std::cout << " EquiTick: Real-Time Pay Equity Enforcement Engine" << std::endl;
-    std::cout << "====================================================" << std::endl;
 
     // Use a large enough buffer to handle bursts in traffic
     RingBuffer<CompensationEvent, 65536> event_queue;
